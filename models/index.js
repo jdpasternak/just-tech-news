@@ -3,6 +3,7 @@ const Post = require("./Post");
 const Vote = require("./Vote");
 const Comment = require("./Comment");
 
+// User hasMany Post
 User.hasMany(Post, {
   foreignKey: "user_id",
 });
@@ -11,12 +12,14 @@ Post.belongsTo(User, {
   foreignKey: "user_id",
 });
 
+// User belongsToMany Post through Vote
 User.belongsToMany(Post, {
   through: Vote,
   as: "voted_posts",
   foreignKey: "user_id",
 });
 
+// Post belongsToMany User through Vote
 Post.belongsToMany(User, {
   through: Vote,
   as: "voted_posts",
@@ -39,6 +42,7 @@ Post.hasMany(Vote, {
   foreignKey: "post_id",
 });
 
+// Comment
 Comment.belongsTo(User, {
   foreignKey: "user_id",
 });
